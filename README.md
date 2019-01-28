@@ -3,7 +3,7 @@
 Created by: [Jeff Wilson](mailto:jeff@jeffalwilson.com)  
 Available from: https://github.com/jawilson/flexget-config (originally located in https://github.com/jawilson/dotfiles)
 
-Forked by: Paul Cardamone
+Forked by: [Paul Cardamone](mailto:paul.cardamone@gmail.com)
 This Fork is available at: (https://github.com/carda21/flexget-config)
 Modified Jeff's great work to use Transmission instead of Deluge.  Also some tweaks to get this working with a local running flexget, accessing a seedbox with Transmission installed
 
