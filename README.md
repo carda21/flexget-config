@@ -3,6 +3,8 @@
 Created by: [Jeff Wilson](mailto:jeff@jeffalwilson.com)  
 Available from: https://github.com/jawilson/flexget-config (originally located in https://github.com/jawilson/dotfiles)
 
+Flexget Version: 2.18.8
+
 Forked by: [Paul Cardamone](mailto:paul.cardamone@gmail.com)
 This Fork is available at: (https://github.com/carda21/flexget-config)
 
