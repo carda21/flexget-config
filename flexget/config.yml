@@ -649,7 +649,7 @@ tasks:
       - no_global # None of the global templates make sense here
       - sorting
     filesystem:
-      path: '{? staging.movies ?}
+      path: '{? staging.movies ?}'
     imdb_lookup: yes
     tmdb_lookup: yes
     #rottentomatoes_lookup: yes
