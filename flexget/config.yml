@@ -388,36 +388,7 @@ tasks:
     run_task:
       when: accepted
       task:
-        - Series-Decompress-Deleted
         - My-TV-Shows-Deleted
-
-
-  Series-Decompress-Deleted:
-    manual: yes
-    priority: 15
-    template:
-      - no_global # None of the global templates make sense here
-      - tv-global
-    seen: no
-    filesystem:
-      path: '{? storage.downloads ?}/completed/tv_shows/'
-      recursive: yes
-      regexp: '.*\.(rar|r0[01]?|zip)$'
-    archives: yes
-    exists_series:
-      - "{? storage.videos ?}/TV Shows"
-      - '{? storage.videos ?}/staging/tv_shows'
-    <<: *tv-series
-    no_entries_ok: yes
-    decompress:
-      keep_dirs: no
-      delete_archive: no
-      to: '{? storage.videos ?}/staging/tv_shows/{{title}}'
-      regexp: '.*\.(mkv|avi|mp4|mpg|mov|m4v)$'
-    run_task:
-      when: accepted
-      task: Series-Sort-Decompressed
-
 
   My-TV-Shows-Deleted:
     manual: yes
@@ -436,7 +407,6 @@ tasks:
             backfill: yes
             from_start: yes
     archive: [tv]
-
 
   Follow-Trakt-Shows:
     priority: 20
@@ -566,55 +536,13 @@ tasks:
       min_seeds: 5
     delay: 7 days # Wait 7 days for a 1080p movie before trying downloading 720p
 
-
-  Series-Decompress:
-    manual: yes
-    template:
-      - no_global # None of the global templates make sense here
-    filesystem:
-      path: '{? storage.downloads ?}/completed/tv_shows/'
-      recursive: yes
-      regexp: '.*\.(rar|r0[01]?|zip)$'
-    archives: yes
-    no_entries_ok: yes
-    decompress:
-      keep_dirs: no
-      delete_archive: no
-      to: '{? storage.videos ?}/staging/tv_shows/{{title}}'
-      regexp: '.*\.(mkv|avi|mp4|mpg|mov|m4v)$'
-    run_task:
-      when: accepted
-      task: Series-Sort-Decompressed
-
-
-  Movies-Decompress:
-    manual: yes
-    template:
-      - no_global # None of the global templates make sense here
-    filesystem:
-      path: '{? storage.downloads ?}/completed/movies/'
-      recursive: yes
-      regexp: '.*\.(rar|r0[01]?|zip)$'
-    archives: yes
-    metainfo_movie: yes
-    no_entries_ok: yes
-    decompress:
-      keep_dirs: no
-      delete_archive: no
-      to: '{? storage.videos ?}/staging/movies/{{movie_name}} ({{movie_year}})'
-      regexp: '.*\.(mkv|avi|mp4|mpg|mov|m4v)$'
-    run_task:
-      when: accepted
-      task: Movies-Sort-Decompressed
-
-
   Series-Sort-Decompressed:
     template:
       - no_global # None of the global templates make sense here
       - sorting
     # Where to get the unpacked (staged) files from
     filesystem:
-      path: '{? staging.tv ?}'
+      path: '{? staging.videos ?}/TV/'
     # Where to get the metadata
     thetvdb_lookup: yes
     # This is needed to get my season offset values
@@ -649,7 +577,7 @@ tasks:
       - no_global # None of the global templates make sense here
       - sorting
     filesystem:
-      path: '{? staging.movies ?}'
+      path: '{? staging.videos ?}/Movies/'
     imdb_lookup: yes
     tmdb_lookup: yes
     #rottentomatoes_lookup: yes
