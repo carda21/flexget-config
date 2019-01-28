@@ -47,7 +47,7 @@ templates:
           {%- if series_name is defined %}
           {{ tvdb_series_name|d(series_name) }} - {{ series_id }} - {% if tvdb_ep_name|default(False) %}{{ tvdb_ep_name }} - {% endif %}{{quality}}
           {%- elif imdb_name is defined %}
-          {{ imdb_name }}{% if imdb_year|d(False) %} ({{imdb_year}}){% endif %} - {{quality}}{% if extras|d(False) %} 3d half-{{ extras|lower }}{% endif %}
+          {{ imdb_name }}{% if imdb_year|d(False) %} ({{imdb_year}}){% endif %}{% if extras|d(False) %} 3d half-{{ extras|lower }}{% endif %}
           {%- else -%}
           {{title}}
           {%- endif %}
