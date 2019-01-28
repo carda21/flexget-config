@@ -614,7 +614,7 @@ tasks:
       - sorting
     # Where to get the unpacked (staged) files from
     filesystem:
-      path: '{? storage.videos ?}/staging/tv_shows/'
+      path: '{? staging.tv ?}'
     # Where to get the metadata
     thetvdb_lookup: yes
     # This is needed to get my season offset values
@@ -649,7 +649,7 @@ tasks:
       - no_global # None of the global templates make sense here
       - sorting
     filesystem:
-      path: '{? storage.videos ?}/staging/movies/'
+      path: '{? staging.movies ?}
     imdb_lookup: yes
     tmdb_lookup: yes
     #rottentomatoes_lookup: yes
