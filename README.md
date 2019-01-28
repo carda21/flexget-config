@@ -5,6 +5,7 @@ Available from: https://github.com/jawilson/flexget-config (originally located i
 
 Forked by: [Paul Cardamone](mailto:paul.cardamone@gmail.com)
 This Fork is available at: (https://github.com/carda21/flexget-config)
+
 Modified Jeff's great work to use Transmission instead of Deluge.  Also some tweaks to get this working with a local running flexget, accessing a seedbox with Transmission installed
 
 ## Installation
