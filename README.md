@@ -3,7 +3,9 @@
 Created by: [Jeff Wilson](mailto:jeff@jeffalwilson.com)  
 Available from: https://github.com/jawilson/flexget-config (originally located in https://github.com/jawilson/dotfiles)
 
-I'm using the [secrets](http://flexget.com/wiki/Plugins/secrets) plugin to hide my private credentials for various plugins. If you want to do this as well, you will need to create a ``secretfile.yml`` file in the same directory as your ``config.yml``.
+Forked by: Paul Cardamone
+This Fork is available at: (https://github.com/carda21/flexget-config)
+Modified Jeff's great work to use Transmission instead of Deluge.  Also some tweaks to get this working with a local running flexget, accessing a seedbox with Transmission installed
 
 ## Installation
 1. Install [Flexget](http://www.flexget.com)
