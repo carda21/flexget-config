@@ -14,7 +14,7 @@ Modified Jeff's great work to use Transmission instead of Deluge.  Also some twe
 1. Install [Flexget](http://www.flexget.com)
 1. Clone this repository into the `.flexget` directory of your home directory
     ```bash
-    git clone https://github.com/jawilson/flexget-config.git .flexget
+    git clone https://github.com/carda21/flexget-config.git .flexget
     ```
 1. Set up your `secretfile.yml`
 1. Run the Flexget daemon
