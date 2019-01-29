@@ -45,9 +45,9 @@ templates:
         title: 'Download Started'
         message: >
           {%- if series_name is defined %}
-          {{ tvdb_series_name|d(series_name) }} - {{ series_id }} - {% if tvdb_ep_name|default(False) %}{{ tvdb_ep_name }} - {% endif %}{{quality}}
+          {{ tvdb_series_name|d(series_name) }} - {{ series_id }} - {% if tvdb_ep_name|default(False) %}{{ tvdb_ep_name }}{% endif %}
           {%- elif imdb_name is defined %}
-          {{ imdb_name }}{% if imdb_year|d(False) %} ({{imdb_year}}){% endif %} - {{quality}}{% if extras|d(False) %} 3d half-{{ extras|lower }}{% endif %}
+          {{ imdb_name }}{% if imdb_year|d(False) %} ({{imdb_year}}){% endif %}{% if extras|d(False) %} 3d half-{{ extras|lower }}{% endif %}
           {%- else -%}
           {{title}}
           {%- endif %}
@@ -239,7 +239,7 @@ templates:
       other_fields: [category]
     discover:
       release_estimations:
-        optimistic: 30 days
+        optimistic: 45 days
       interval: 2 hours
       what:
         - trakt_list:
@@ -535,6 +535,18 @@ tasks:
     torrent_alive:
       min_seeds: 5
     delay: 7 days # Wait 7 days for a 1080p movie before trying downloading 720p
+
+  My-Movies-Pre:
+    priority: 130
+    template:
+      - movies-queued
+      - movies-filter
+      - movies-global
+    quality: 720p+ dvdscr+ divx+ !mp3 !aac
+    torrent_alive:
+      min_seeds: 5
+    delay: 12 days # Wait 12 days for a 1080p movie, 7 days for a 720 movie before trying downloading Pre-720p
+
 
   Series-Sort-Decompressed:
     template:
