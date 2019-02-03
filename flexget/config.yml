@@ -12,7 +12,7 @@
 variables: secretfile.yml
 
 #Don't need the wev server
-web_server: yes
+#web_server: yes
 
 templates:
   global:
@@ -39,7 +39,7 @@ templates:
       thexem.de: 10 seconds
     # TorrentLeech uses cloudflare anti-bot measures, bypass those
     cfscraper: yes
-    verify_ssl_certificates: no
+    #verify_ssl_certificates: no
     notify:
       entries:
         title: 'Download Started'
@@ -102,6 +102,8 @@ templates:
         - '*.wmv'
     # Size and seed restrictions require real torrents
     #convert_magnet: yes
+    #rewrite_magnet:
+    #  scrape: yes
     magnets: no
 
   tv-anchors:
@@ -113,6 +115,8 @@ templates:
       include:
         - series.yml
       configure_series: &tv-series-from
+        settings:
+          tracking: backfill
         from:
           inputs:
             - trakt_list:
@@ -130,10 +134,10 @@ templates:
             category: [41, 49]
             use_tvdb: true
             min_seeders: 10
-        - piratebay:
-            category: 'highres tv'
-        - piratebay:
-            category: 'tv'
+            #- piratebay:
+            #category: 'highres tv'
+            #- piratebay:
+            #category: 'tv'
 
   tv-trakt-follow:
     disable:
@@ -151,9 +155,9 @@ templates:
     configure_series:
       <<: *tv-series-from
       settings:
-        target: 720p+ webrip+
+        target: 720p+ webrip+ !h265
         timeframe: 3 days
-        quality: 480p+ webrip+
+        quality: webrip+ !h265
         tracking: backfill
         season_packs: yes
     # Impose reasonable size constraints
@@ -254,10 +258,10 @@ templates:
         - rarbg:
             category: [44, 45, 47]
             min_seeders: 10
-        - piratebay:
-            category: 'highres movies'
-        - piratebay:
-            category: 'movies'
+            #- piratebay:
+            #category: 'highres movies'
+            #- piratebay:
+            #category: 'movies'
     archive: [movies]
     set:
       label: my-movies
@@ -322,6 +326,22 @@ tasks:
     series_add: yes
     set:
       label: local-tv
+
+  Sync-TV-Shows-Flex:
+    manual: yes
+    template: no_global # None of the global templates make sense here
+    filesystem:
+      path:
+        - '{? storage.videos ?}/TV Shows'
+      regexp: '.*\.(avi|mkv|mp4|mpg)'
+      recursive: yes
+    regexp:
+      reject:
+        - \bsample\b: {from: title}
+    disable: builtins
+    all_series:
+      tracking: no
+    exec: echo "Found {{title}}" >> /dev/null
 
 
   # Same as above but for movies
@@ -522,7 +542,7 @@ tasks:
       - movies-global
       - movies-filter
       - movies-queued
-    quality: 1080p+ bluray+ h264 !aac !mp3 !ac3
+    quality: 1080p+ bluray+ h264 dtshd+ !aac !mp3 !ac3 !h265
 
 
   My-Movies-720p:
@@ -531,7 +551,7 @@ tasks:
       - movies-queued
       - movies-filter
       - movies-global
-    quality: 720p+ dvdrip+ h264 !mp3 !aac
+    quality: 720p+ dvdrip+ h264 !mp3 !aac !h265
     torrent_alive:
       min_seeds: 5
     delay: 7 days # Wait 7 days for a 1080p movie before trying downloading 720p
@@ -542,7 +562,7 @@ tasks:
       - movies-queued
       - movies-filter
       - movies-global
-    quality: 720p+ dvdscr+ divx+ !mp3 !aac
+    quality: 720p+ dvdscr+ divx+ !mp3 !aac !h265
     torrent_alive:
       min_seeds: 5
     delay: 12 days # Wait 12 days for a 1080p movie, 7 days for a 720 movie before trying downloading Pre-720p
