@@ -1,10 +1,6 @@
 series:
   - "Real Time with Bill Maher":
       identified_by: date
-  - "Star Trek: Discovery":
-      name_regexp:
-        - ^star.trek.discovery.
-        - ^Star Trek - Discovery
   - "Happy!":
       name_regexp:
         - ^Happy.2017.

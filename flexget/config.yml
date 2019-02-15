@@ -22,7 +22,7 @@ templates:
       port: 12332
       username: '{? transmission.username ?}'
       password: '{? transmission.password ?}'
-      addpaused: No
+      add_paused: No
 
     # Make there's 50GB free before adding more downloads
     free_space:
@@ -323,7 +323,6 @@ tasks:
       recursive: yes
       retrieve: files
       regexp: '.*\.torrent$'
-    series_add: yes
     set:
       label: local-tv
 
@@ -542,7 +541,7 @@ tasks:
       - movies-global
       - movies-filter
       - movies-queued
-    quality: 1080p+ bluray+ h264 dtshd+ !aac !mp3 !ac3 !h265
+    quality: 1080p+ bluray+ h264 !aac !mp3 !ac3 !h265
 
 
   My-Movies-720p:
